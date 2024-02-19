@@ -13,6 +13,8 @@ import ActiveSession from '../models/activeSession';
 import User from '../models/user';
 import { connection } from '../server/database';
 import { logoutUser } from '../controllers/logout.controller';
+import Quizz from '../models/quizz';
+// import Quizz from '../models/quizz';
 
 // eslint-disable-next-line new-cap
 const router = express.Router();
@@ -24,6 +26,15 @@ const userSchema = Joi.object().keys({
     .optional(),
   password: Joi.string().required(),
 });
+
+router.get('', (_, res)=> {
+  const quizzRepository = connection!.getRepository(Quizz);
+
+  quizzRepository.find({}).then((quizz) => {
+    console.log('quizzz',quizz)
+    res.json({ success: true, quizz:{question:quizz} });
+  }).catch(() => res.json({ success: false }));
+})
 
 router.post('/register', (req, res) => {
   // Joy Validation

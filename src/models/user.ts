@@ -3,20 +3,20 @@ import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 @Entity()
 export default class User {
   @PrimaryGeneratedColumn('uuid')
-  id!: string;
+  id?: string;
 
   @Column({ type: 'text', nullable: false })
-  username!: string;
+  username?: string;
 
   @Column({ type: 'text', nullable: false })
-  email!: string;
+  email?: string;
 
   @Column({ type: 'text', nullable: false })
-  password!: string;
+  password?: string;
 
   @Column({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP' })
   date?: string;
 
   @Column({type: 'text'})
-  user_role!: string
+  user_role?: string
 }
